@@ -5,13 +5,15 @@ import './../styles/App.css';
 const App = () => {
   const [inputVal , setInputVal]=useState({userName:'',password:''});
   const [errorMsg ,setErrorMsg]=useState('');
-
+  const [flag,setFlag]=useState(false);
 
   function validateFn(e){
     e.preventDefault();
     if(inputVal.userName==='' || inputVal.password===''){
+      setFlag(true);
       setErrorMsg('Both username and password are required.');
     }else{
+      setFlag(false);
       setErrorMsg('');
     }
   }
@@ -27,7 +29,8 @@ const App = () => {
             <label htmlFor="password">UserName:</label>
             <input type="password" placeholder="Enter password" onChange={(e)=>setInputVal({...inputVal,password:e.target.value})} />
           </div>
-          <p id="errorMessage">{errorMsg}</p>
+          {/* {{flag}&&<p id="errorMessage">{errorMsg}</p>} */}
+          {flag?<p id="errorMessage">{errorMsg}</p>:null}
           <button>Login</button>
         </form>
     </div>
